@@ -1,6 +1,7 @@
 <template>
   <transition name="viewer-fade">
-    <div tabindex="-1" ref="el-image-viewer__wrapper" class="el-image-viewer__wrapper" :style="{ 'z-index': viewerZIndex }">
+    <div tabindex="-1" ref="el-image-viewer__wrapper" class="el-image-viewer__wrapper"
+      :style="{ 'z-index': viewerZIndex }">
       <div class="el-image-viewer__mask" @click.self="handleMaskClick"></div>
       <!-- CLOSE -->
       <span class="el-image-viewer__btn el-image-viewer__close" @click="hide">
@@ -8,17 +9,13 @@
       </span>
       <!-- ARROW -->
       <template v-if="!isSingle">
-        <span
-          class="el-image-viewer__btn el-image-viewer__prev"
-          :class="{ 'is-disabled': !infinite && isFirst }"
+        <span class="el-image-viewer__btn el-image-viewer__prev" :class="{ 'is-disabled': !infinite && isFirst }"
           @click="prev">
-          <i class="el-icon-arrow-left"/>
+          <i class="el-icon-arrow-left" />
         </span>
-        <span
-          class="el-image-viewer__btn el-image-viewer__next"
-          :class="{ 'is-disabled': !infinite && isLast }"
+        <span class="el-image-viewer__btn el-image-viewer__next" :class="{ 'is-disabled': !infinite && isLast }"
           @click="next">
-          <i class="el-icon-arrow-right"/>
+          <i class="el-icon-arrow-right" />
         </span>
       </template>
       <!-- ACTIONS -->
@@ -35,17 +32,8 @@
       </div>
       <!-- CANVAS -->
       <div class="el-image-viewer__canvas">
-        <img
-          v-for="(url, i) in urlList"
-          v-if="i === index"
-          ref="img"
-          class="el-image-viewer__img"
-          :key="url"
-          :src="currentImg"
-          :style="imgStyle"
-          @load="handleImgLoad"
-          @error="handleImgError"
-          @mousedown="handleMouseDown">
+        <img v-for="(url, i) in urlList" v-if="i === index" ref="img" class="el-image-viewer__img" :key="url"
+          :src="currentImg" :style="imgStyle" @load="handleImgLoad" @error="handleImgError" @mousedown="handleMouseDown">
       </div>
     </div>
   </transition>
@@ -83,11 +71,11 @@ export default {
     },
     onSwitch: {
       type: Function,
-      default: () => {}
+      default: () => { }
     },
     onClose: {
       type: Function,
-      default: () => {}
+      default: () => { }
     },
     initialIndex: {
       type: Number,
@@ -137,8 +125,8 @@ export default {
       const style = {
         transform: `scale(${scale}) rotate(${deg}deg)`,
         transition: enableTransition ? 'transform .3s' : '',
-        'margin-left': `${offsetX}px`,
-        'margin-top': `${offsetY}px`
+        'margin-left': `${offsetX * 2}px`,
+        'margin-top': `${offsetY * 2}px`
       };
       if (this.mode === Mode.CONTAIN) {
         style.maxWidth = style.maxHeight = '100%';
@@ -152,7 +140,7 @@ export default {
   },
   watch: {
     index: {
-      handler: function(val) {
+      handler: function (val) {
         this.reset();
         this.onSwitch(val);
       }
